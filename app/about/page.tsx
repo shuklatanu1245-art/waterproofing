@@ -63,7 +63,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { label: "Years Experience", value: "15+" },
+              { label: "Years Experience", value: "5+" },
               { label: "Projects Completed", value: "1200+" },
               { label: "Cities Covered", value: "5" },
               { label: "Happy Clients", value: "98%" }

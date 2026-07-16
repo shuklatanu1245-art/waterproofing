@@ -19,10 +19,8 @@ const allServices = [
   { id: 7, title: "Exterior Wall Waterproofing", icon: <Building className="w-8 h-8" />, desc: "Prevent rain water from seeping through exterior walls." },
   { id: 8, title: "Foundation Waterproofing", icon: <Hammer className="w-8 h-8" />, desc: "Strengthen your building's base by preventing water ingress." },
   { id: 9, title: "Crack Filling & Repair", icon: <ArrowUpRight className="w-8 h-8" />, desc: "Professional sealing of cracks to prevent future water ingress." },
-  { id: 10, title: "Injection Grouting", icon: <Syringe className="w-8 h-8" />, desc: "High-pressure PU grouting to stop active water leaks instantly." },
   { id: 11, title: "Chemical Waterproofing", icon: <Beaker className="w-8 h-8" />, desc: "Advanced liquid applied membranes for tough surfaces." },
   { id: 12, title: "Damp Proofing", icon: <CloudRain className="w-8 h-8" />, desc: "Treatments to block rising dampness from the ground." },
-  { id: 13, title: "Expansion Joint Treatment", icon: <SplitSquareHorizontal className="w-8 h-8" />, desc: "Flexible sealants for structural expansion joints." },
   { id: 14, title: "Swimming Pool Waterproofing", icon: <Waves className="w-8 h-8" />, desc: "Epoxy and cementitious coatings for pools and water bodies." },
   { id: 15, title: "Industrial Waterproofing", icon: <Factory className="w-8 h-8" />, desc: "Heavy-duty waterproofing for factories and warehouses." },
 ];
