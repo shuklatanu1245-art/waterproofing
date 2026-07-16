@@ -1,6 +1,7 @@
 "use server";
 
 import { sql } from "@vercel/postgres";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export async function createTable() {
@@ -151,10 +152,87 @@ export async function addBeforeAfterVideo(data: { title: string, beforeUrl: stri
 export async function deleteBeforeAfterVideo(id: number) {
   try {
     await sql`DELETE FROM before_after_videos WHERE id = ${id}`;
+    revalidatePath("/admin/dashboard/videos");
+    revalidatePath("/");
+    revalidatePath("/gallery");
     return { success: true };
-  } catch (error) {
-    console.error("Error deleting video:", error);
-    return { success: false };
+  } catch (err) {
+    console.error("Error deleting video:", err);
+    return { error: "Failed to delete video" };
+  }
+}
+
+export async function getTestimonials() {
+  try {
+    const { rows } = await sql`SELECT * FROM testimonials ORDER BY created_at DESC`;
+    return rows;
+  } catch (err) {
+    console.error("Error fetching testimonials:", err);
+    return [];
+  }
+}
+
+export async function addTestimonial(name: string, role: string, text: string) {
+  try {
+    await sql`
+      INSERT INTO testimonials (name, role, text)
+      VALUES (${name}, ${role}, ${text})
+    `;
+    revalidatePath("/admin/dashboard/testimonials");
+    revalidatePath("/");
+    return { success: true };
+  } catch (err) {
+    console.error("Error adding testimonial:", err);
+    return { error: "Failed to add testimonial" };
+  }
+}
+
+export async function deleteTestimonial(id: number) {
+  try {
+    await sql`DELETE FROM testimonials WHERE id = ${id}`;
+    revalidatePath("/admin/dashboard/testimonials");
+    revalidatePath("/");
+    return { success: true };
+  } catch (err) {
+    console.error("Error deleting testimonial:", err);
+    return { error: "Failed to delete testimonial" };
+  }
+}
+
+export async function getGalleryPhotos() {
+  try {
+    const { rows } = await sql`SELECT * FROM gallery_photos ORDER BY display_order ASC`;
+    return rows;
+  } catch (err) {
+    console.error("Error fetching photos:", err);
+    return [];
+  }
+}
+
+export async function addGalleryPhoto(title: string, image_url: string, display_order: number = 0) {
+  try {
+    await sql`
+      INSERT INTO gallery_photos (title, image_url, display_order)
+      VALUES (${title}, ${image_url}, ${display_order})
+    `;
+    revalidatePath("/admin/dashboard/photos");
+    revalidatePath("/gallery");
+    return { success: true };
+  } catch (err) {
+    console.error("Error adding photo:", err);
+    return { error: "Failed to add photo" };
+  }
+}
+
+export async function deleteGalleryPhoto(id: number) {
+  try {
+    await sql`DELETE FROM gallery_photos WHERE id = ${id}`;
+    revalidatePath("/admin/dashboard/photos");
+    revalidatePath("/gallery");
+    return { success: true };
+  } catch (err) {
+    console.error("Error deleting photo:", err);
+    return { error: "Failed to delete photo" };
   }
 }
 

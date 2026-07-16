@@ -6,7 +6,7 @@ import { Process } from "@/components/sections/Process";
 import { BeforeAfterGallery } from "@/components/sections/BeforeAfterGallery";
 import { TestimonialCarousel } from "@/components/sections/TestimonialCarousel";
 import { LeadGenForm } from "@/components/forms/LeadGenForm";
-import { getServices, getBeforeAfterVideos } from "@/lib/actions";
+import { getServices, getBeforeAfterVideos, getTestimonials } from "@/lib/actions";
 
 export const dynamic = "force-dynamic";
 
@@ -14,6 +14,7 @@ export default async function Home() {
   const allServices = await getServices();
   const topServices = allServices.slice(0, 6);
   const videos = await getBeforeAfterVideos();
+  const testimonials = await getTestimonials();
 
   return (
     <>
@@ -23,7 +24,7 @@ export default async function Home() {
       <WhyChooseUs />
       <Process />
       <BeforeAfterGallery videos={videos} />
-      <TestimonialCarousel />
+      <TestimonialCarousel testimonials={testimonials} />
       <LeadGenForm />
     </>
   );

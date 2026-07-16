@@ -28,6 +28,28 @@ async function main() {
       );
     `;
 
+    console.log("Creating testimonials table...");
+    await sql`
+      CREATE TABLE IF NOT EXISTS testimonials (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        role VARCHAR(255) NOT NULL,
+        text TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `;
+
+    console.log("Creating gallery_photos table...");
+    await sql`
+      CREATE TABLE IF NOT EXISTS gallery_photos (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255),
+        image_url TEXT NOT NULL,
+        display_order INTEGER DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `;
+
     // Seed services if the table is empty
     const { rowCount } = await sql`SELECT 1 FROM services LIMIT 1`;
     if (rowCount === 0) {
@@ -53,6 +75,34 @@ async function main() {
           INSERT INTO services (title, icon, description, display_order)
           VALUES (${svc.title}, ${svc.icon}, ${svc.desc}, ${svc.order})
         `;
+      }
+    }
+    const { rowCount: testCount } = await sql`SELECT 1 FROM testimonials LIMIT 1`;
+    if (testCount === 0) {
+      console.log("Seeding initial testimonials...");
+      const initialTestimonials = [
+        { name: "Rajesh Kumar", role: "Homeowner", text: "We had severe leakage in our terrace for years. AquaProtect fixed it completely within 3 days. It's been raining heavily and there is zero dampness. Highly recommended!" },
+        { name: "Anita Sharma", role: "Apartment Secretary", text: "Very professional team. They inspected our entire building and provided a very cost-effective waterproofing solution for the exterior walls. The quality of work is excellent." },
+        { name: "Vikram Singh", role: "Business Owner", text: "I hired them for basement waterproofing of my warehouse. They used high-grade chemicals and the problem is permanently solved. Great service and timely execution." }
+      ];
+      for (const t of initialTestimonials) {
+        await sql`INSERT INTO testimonials (name, role, text) VALUES (${t.name}, ${t.role}, ${t.text})`;
+      }
+    }
+
+    const { rowCount: photoCount } = await sql`SELECT 1 FROM gallery_photos LIMIT 1`;
+    if (photoCount === 0) {
+      console.log("Seeding initial gallery photos...");
+      const initialPhotos = [
+        { title: "Project 1", url: "https://images.unsplash.com/photo-1541888086425-d81bb19240f5?q=80&w=800&auto=format&fit=crop", order: 1 },
+        { title: "Project 2", url: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=800&auto=format&fit=crop", order: 2 },
+        { title: "Project 3", url: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop", order: 3 },
+        { title: "Project 4", url: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop", order: 4 },
+        { title: "Project 5", url: "https://images.unsplash.com/photo-1574359411659-15573a27fd0c?q=80&w=800&auto=format&fit=crop", order: 5 },
+        { title: "Project 6", url: "https://images.unsplash.com/photo-1621293954908-907159247fc8?q=80&w=800&auto=format&fit=crop", order: 6 },
+      ];
+      for (const p of initialPhotos) {
+        await sql`INSERT INTO gallery_photos (title, image_url, display_order) VALUES (${p.title}, ${p.url}, ${p.order})`;
       }
     }
 

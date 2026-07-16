@@ -4,28 +4,19 @@ import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Star, Quote } from "lucide-react";
 
-const testimonials = [
-  {
-    id: 1,
-    name: "Rajesh Kumar",
-    role: "Homeowner",
-    text: "We had severe leakage in our terrace for years. AquaProtect fixed it completely within 3 days. It's been raining heavily and there is zero dampness. Highly recommended!",
-  },
-  {
-    id: 2,
-    name: "Anita Sharma",
-    role: "Apartment Secretary",
-    text: "Very professional team. They inspected our entire building and provided a very cost-effective waterproofing solution for the exterior walls. The quality of work is excellent.",
-  },
-  {
-    id: 3,
-    name: "Vikram Singh",
-    role: "Business Owner",
-    text: "I hired them for basement waterproofing of my warehouse. They used high-grade chemicals and the problem is permanently solved. Great service and timely execution.",
-  },
-];
+interface TestimonialCarouselProps {
+  testimonials?: any[];
+}
 
-export function TestimonialCarousel() {
+export function TestimonialCarousel({ testimonials = [] }: TestimonialCarouselProps) {
+  const displayTestimonials = testimonials.length > 0 ? testimonials : [
+    {
+      id: 1,
+      name: "Placeholder Client",
+      role: "Customer",
+      text: "We had a great experience with AquaProtect. Highly recommended!"
+    }
+  ];
   return (
     <section className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,7 +27,7 @@ export function TestimonialCarousel() {
         />
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-          {testimonials.map((testimonial, index) => (
+          {displayTestimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
               initial={{ opacity: 0, y: 20 }}
