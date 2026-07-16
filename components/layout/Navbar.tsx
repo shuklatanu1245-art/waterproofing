@@ -47,7 +47,7 @@ export function Navbar() {
           </div>
           <div className="flex items-center lg:hidden gap-4">
              <Link
-              href="tel:+1234567890"
+              href="tel:+919893666317"
               className="bg-accent text-white p-2 rounded-full shadow-md"
             >
               <Phone className="w-5 h-5" />

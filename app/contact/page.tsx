@@ -61,8 +61,8 @@ export default function ContactPage() {
                   </div>
                   <div className="ml-4">
                     <h4 className="font-bold text-primary mb-1">Call Us</h4>
-                    <a href="tel:+1234567890" className="text-gray-600 hover:text-accent transition-colors block">
-                      +1 (234) 567-890
+                    <a href="tel:+919893666317" className="text-gray-600 hover:text-accent transition-colors block">
+                      +91 98936 66317
                     </a>
                   </div>
                 </div>
@@ -73,8 +73,8 @@ export default function ContactPage() {
                   </div>
                   <div className="ml-4">
                     <h4 className="font-bold text-primary mb-1">Email Us</h4>
-                    <a href="mailto:info@placeholder.com" className="text-gray-600 hover:text-accent transition-colors block">
-                      info@placeholder.com
+                    <a href="mailto:praveengoswami.in@gmail.com" className="text-gray-600 hover:text-accent transition-colors block">
+                      praveengoswami.in@gmail.com
                     </a>
                   </div>
                 </div>
@@ -86,8 +86,8 @@ export default function ContactPage() {
                   <div className="ml-4">
                     <h4 className="font-bold text-primary mb-1">Visit Us</h4>
                     <p className="text-gray-600">
-                      [Company Address Placeholder]<br />
-                      City, State, ZIP
+                      House Number-208, Vaishnavi Dham Adityapuram, <br />
+                      Gwalior (m.p) pin - 474020
                     </p>
                   </div>
                 </div>

@@ -76,19 +76,19 @@ export function Footer() {
               <li className="flex items-start">
                 <MapPin className="w-5 h-5 text-accent mr-3 mt-1 flex-shrink-0" />
                 <span className="text-gray-300">
-                  [Company Address Placeholder, City, State, ZIP]
+                  House Number-208, Vaishnavi Dham Adityapuram, Gwalior (m.p) pin - 474020
                 </span>
               </li>
               <li className="flex items-center">
                 <Phone className="w-5 h-5 text-accent mr-3 flex-shrink-0" />
-                <a href="tel:+1234567890" className="text-gray-300 hover:text-accent transition-colors">
-                  +1 (234) 567-890
+                <a href="tel:+919893666317" className="text-gray-300 hover:text-accent transition-colors">
+                  +91 98936 66317
                 </a>
               </li>
               <li className="flex items-center">
                 <Mail className="w-5 h-5 text-accent mr-3 flex-shrink-0" />
-                <a href="mailto:info@placeholder.com" className="text-gray-300 hover:text-accent transition-colors">
-                  [info@placeholder.com]
+                <a href="mailto:praveengoswami.in@gmail.com" className="text-gray-300 hover:text-accent transition-colors">
+                  praveengoswami.in@gmail.com
                 </a>
               </li>
             </ul>
