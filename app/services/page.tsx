@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import { 
   Home, Grid, Bath, Archive, LayoutGrid, Droplets, 
-  Building, Hammer, ArrowUpRight, Beaker, Syringe, 
-  CloudRain, SplitSquareHorizontal, Waves, Factory
+  Building, Hammer, ArrowUpRight, Beaker, 
+  CloudRain, Waves, Factory
 } from "lucide-react";
 
 const allServices = [

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { submitContact } from "@/lib/actions";
 
 type ContactFormData = {
   name: string;
@@ -20,13 +21,15 @@ export default function ContactPage() {
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Contact Form Data:", data);
+    const res = await submitContact(data);
     setIsSubmitting(false);
-    setIsSuccess(true);
-    reset();
-    setTimeout(() => setIsSuccess(false), 5000);
+    if (res.success) {
+      setIsSuccess(true);
+      reset();
+      setTimeout(() => setIsSuccess(false), 5000);
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (

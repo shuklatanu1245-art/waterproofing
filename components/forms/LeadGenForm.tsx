@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
+import { submitLead } from "@/lib/actions";
 
 type FormData = {
   name: string;
@@ -22,13 +23,15 @@ export function LeadGenForm() {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Form Data Submitted:", data);
+    const res = await submitLead(data);
     setIsSubmitting(false);
-    setIsSuccess(true);
-    reset();
-    setTimeout(() => setIsSuccess(false), 5000);
+    if (res.success) {
+      setIsSuccess(true);
+      reset();
+      setTimeout(() => setIsSuccess(false), 5000);
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (
