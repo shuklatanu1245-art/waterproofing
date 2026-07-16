@@ -1,7 +1,7 @@
 "use server";
 
 import { sql } from "@vercel/postgres";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore as noStore } from "next/cache";
 import { cookies } from "next/headers";
 
 export async function createTable() {
@@ -93,6 +93,7 @@ export async function adminLogin(password: string, email: string) {
 
 // CMS Actions - Services
 export async function getServices() {
+  noStore();
   try {
     const { rows } = await sql`SELECT * FROM services ORDER BY display_order ASC`;
     return rows;
@@ -127,6 +128,7 @@ export async function deleteService(id: number) {
 
 // CMS Actions - Before/After Videos
 export async function getBeforeAfterVideos() {
+  noStore();
   try {
     const { rows } = await sql`SELECT * FROM before_after_videos ORDER BY created_at DESC`;
     return rows;
@@ -163,6 +165,7 @@ export async function deleteBeforeAfterVideo(id: number) {
 }
 
 export async function getTestimonials() {
+  noStore();
   try {
     const { rows } = await sql`SELECT * FROM testimonials ORDER BY created_at DESC`;
     return rows;
@@ -200,6 +203,7 @@ export async function deleteTestimonial(id: number) {
 }
 
 export async function getGalleryPhotos() {
+  noStore();
   try {
     const { rows } = await sql`SELECT * FROM gallery_photos ORDER BY display_order ASC`;
     return rows;
