@@ -1,7 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { getBeforeAfterVideos } from "@/lib/actions";
+import { BeforeAfterGallery } from "@/components/sections/BeforeAfterGallery";
 
 // Sample placeholder images for masonry gallery
 const galleryImages = [
@@ -13,7 +12,11 @@ const galleryImages = [
   "https://images.unsplash.com/photo-1621293954908-907159247fc8?q=80&w=800&auto=format&fit=crop",
 ];
 
-export default function GalleryPage() {
+export const dynamic = "force-dynamic";
+
+export default async function GalleryPage() {
+  const videos = await getBeforeAfterVideos();
+
   return (
     <div className="pt-20 bg-background min-h-screen">
       <div className="bg-primary text-white py-20 text-center">
@@ -23,48 +26,7 @@ export default function GalleryPage() {
         </p>
       </div>
 
-      {/* Before & After Videos */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading 
-            title="Before & After Videos" 
-            subtitle="See the real difference our treatments make."
-            centered
-          />
-          
-          <div className="mt-12 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative rounded-2xl overflow-hidden shadow-lg bg-gray-100 aspect-video flex items-center justify-center border-4 border-gray-200"
-            >
-              <div className="text-gray-400 text-center p-4">
-                <span className="block font-bold text-xl mb-2">Before</span>
-                <span className="text-sm">[Before Video Placeholder]</span>
-              </div>
-              <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-md">
-                BEFORE
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative rounded-2xl overflow-hidden shadow-lg bg-gray-100 aspect-video flex items-center justify-center border-4 border-accent"
-            >
-              <div className="text-gray-400 text-center p-4">
-                <span className="block font-bold text-xl mb-2">After</span>
-                <span className="text-sm">[After Video Placeholder]</span>
-              </div>
-              <div className="absolute top-4 left-4 bg-accent text-white px-3 py-1 rounded-full text-sm font-bold shadow-md">
-                AFTER
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      <BeforeAfterGallery videos={videos} />
 
       {/* Image Gallery */}
       <section className="py-20 bg-white">
@@ -77,12 +39,8 @@ export default function GalleryPage() {
           
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {galleryImages.map((src, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: (index % 3) * 0.1 }}
                 className="relative h-64 rounded-xl overflow-hidden group cursor-pointer shadow-sm hover:shadow-xl"
               >
                 <div 
@@ -94,7 +52,7 @@ export default function GalleryPage() {
                     View Image
                   </span>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

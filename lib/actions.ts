@@ -90,6 +90,74 @@ export async function adminLogin(password: string, email: string) {
   return { success: false };
 }
 
+// CMS Actions - Services
+export async function getServices() {
+  try {
+    const { rows } = await sql`SELECT * FROM services ORDER BY display_order ASC`;
+    return rows;
+  } catch (error) {
+    console.error("Error fetching services:", error);
+    return [];
+  }
+}
+
+export async function addService(data: { title: string, icon: string, description: string, display_order: number }) {
+  try {
+    await sql`
+      INSERT INTO services (title, icon, description, display_order)
+      VALUES (${data.title}, ${data.icon}, ${data.description}, ${data.display_order})
+    `;
+    return { success: true };
+  } catch (error) {
+    console.error("Error adding service:", error);
+    return { success: false };
+  }
+}
+
+export async function deleteService(id: number) {
+  try {
+    await sql`DELETE FROM services WHERE id = ${id}`;
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting service:", error);
+    return { success: false };
+  }
+}
+
+// CMS Actions - Before/After Videos
+export async function getBeforeAfterVideos() {
+  try {
+    const { rows } = await sql`SELECT * FROM before_after_videos ORDER BY created_at DESC`;
+    return rows;
+  } catch (error) {
+    console.error("Error fetching videos:", error);
+    return [];
+  }
+}
+
+export async function addBeforeAfterVideo(data: { title: string, beforeUrl: string, afterUrl: string, description: string }) {
+  try {
+    await sql`
+      INSERT INTO before_after_videos (title, before_video_url, after_video_url, description)
+      VALUES (${data.title}, ${data.beforeUrl}, ${data.afterUrl}, ${data.description})
+    `;
+    return { success: true };
+  } catch (error) {
+    console.error("Error adding video:", error);
+    return { success: false };
+  }
+}
+
+export async function deleteBeforeAfterVideo(id: number) {
+  try {
+    await sql`DELETE FROM before_after_videos WHERE id = ${id}`;
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting video:", error);
+    return { success: false };
+  }
+}
+
 export async function adminLogout() {
   cookies().delete("admin_session");
   return { success: true };

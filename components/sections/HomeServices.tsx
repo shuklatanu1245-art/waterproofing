@@ -2,43 +2,16 @@
 
 import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Home, Droplets, Grid, Archive, Bath, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
-const services = [
-  {
-    title: "Roof Waterproofing",
-    description: "Complete protection for all types of roofs against water seepage.",
-    icon: <Home className="w-8 h-8" />,
-  },
-  {
-    title: "Terrace Waterproofing",
-    description: "Durable terrace treatments to prevent leakage into lower floors.",
-    icon: <Grid className="w-8 h-8" />,
-  },
-  {
-    title: "Bathroom Waterproofing",
-    description: "Advanced solutions for bathrooms to stop tile and wall dampness.",
-    icon: <Bath className="w-8 h-8" />,
-  },
-  {
-    title: "Basement Waterproofing",
-    description: "Protect your basement from groundwater and humidity.",
-    icon: <Archive className="w-8 h-8" />,
-  },
-  {
-    title: "Water Tank Waterproofing",
-    description: "Safe and hygienic waterproofing for underground and overhead tanks.",
-    icon: <Droplets className="w-8 h-8" />,
-  },
-  {
-    title: "Crack Filling & Repair",
-    description: "Professional sealing of cracks to prevent future water ingress.",
-    icon: <ArrowUpRight className="w-8 h-8" />,
-  },
-];
+import { DynamicIcon } from "@/components/ui/DynamicIcon";
 
-export function HomeServices() {
+interface HomeServicesProps {
+  services?: any[];
+}
+
+export function HomeServices({ services = [] }: HomeServicesProps) {
   return (
     <section className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,7 +32,7 @@ export function HomeServices() {
               className="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-shadow border border-gray-100 group"
             >
               <div className="w-16 h-16 bg-blue-50 text-accent rounded-full flex items-center justify-center mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
-                {service.icon}
+                <DynamicIcon name={service.icon} className="w-8 h-8" />
               </div>
               <h3 className="text-xl font-bold text-primary mb-3">{service.title}</h3>
               <p className="text-gray-600 mb-6">{service.description}</p>

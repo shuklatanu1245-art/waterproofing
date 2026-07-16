@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getSubmissions } from "@/lib/actions";
-import LogoutButton from "./LogoutButton";
+import { AdminNav } from "@/components/admin/AdminNav";
 
 interface Submission {
   id: number;
@@ -31,10 +31,7 @@ export default async function AdminDashboardPage() {
   return (
     <div className="min-h-screen bg-gray-50 pt-24 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-primary">Admin Dashboard</h1>
-          <LogoutButton />
-        </div>
+        <AdminNav />
 
         <div className="bg-white shadow overflow-hidden sm:rounded-lg border border-gray-200">
           <div className="px-4 py-5 sm:px-6 bg-primary text-white">

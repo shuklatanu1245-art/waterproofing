@@ -6,16 +6,23 @@ import { Process } from "@/components/sections/Process";
 import { BeforeAfterGallery } from "@/components/sections/BeforeAfterGallery";
 import { TestimonialCarousel } from "@/components/sections/TestimonialCarousel";
 import { LeadGenForm } from "@/components/forms/LeadGenForm";
+import { getServices, getBeforeAfterVideos } from "@/lib/actions";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const allServices = await getServices();
+  const topServices = allServices.slice(0, 6);
+  const videos = await getBeforeAfterVideos();
+
   return (
     <>
       <Hero />
       <HomeAbout />
-      <HomeServices />
+      <HomeServices services={topServices} />
       <WhyChooseUs />
       <Process />
-      <BeforeAfterGallery />
+      <BeforeAfterGallery videos={videos} />
       <TestimonialCarousel />
       <LeadGenForm />
     </>
