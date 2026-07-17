@@ -42,7 +42,7 @@ export function CloudinaryUpload({
       const signRes = await fetch("/api/cloudinary/sign", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ folder }),
+        body: JSON.stringify({}),
       });
       
       if (!signRes.ok) throw new Error("Failed to get upload signature");
@@ -57,7 +57,6 @@ export function CloudinaryUpload({
       formData.append("api_key", apiKey);
       formData.append("timestamp", timestamp.toString());
       formData.append("signature", signature);
-      formData.append("folder", folder);
 
       const uploadRes = await fetch(
         `https://api.cloudinary.com/v1_1/${cloudName}/${resourceType}/upload`,
