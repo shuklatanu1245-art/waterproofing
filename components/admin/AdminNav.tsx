@@ -10,6 +10,7 @@ export function AdminNav() {
   const links = [
     { name: "Inquiries", href: "/admin/dashboard" },
     { name: "Services", href: "/admin/dashboard/services" },
+    { name: "Process Steps", href: "/admin/dashboard/process" },
     { name: "Before & After Videos", href: "/admin/dashboard/videos" },
   ];
 

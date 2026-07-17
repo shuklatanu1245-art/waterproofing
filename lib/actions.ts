@@ -19,6 +19,14 @@ export async function createTable() {
         message TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
+      CREATE TABLE IF NOT EXISTS process_steps (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        description TEXT NOT NULL,
+        image_url VARCHAR(500),
+        display_order INTEGER DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
     `;
     return { success: true, message: "Table created successfully" };
   } catch (error) {
@@ -255,6 +263,45 @@ export async function deleteGalleryPhoto(id: number) {
   } catch (err) {
     console.error("Error deleting photo:", err);
     return { error: "Failed to delete photo" };
+  }
+}
+
+// CMS Actions - Process Steps
+export async function getProcessSteps() {
+  noStore();
+  try {
+    const { rows } = await sql`SELECT * FROM process_steps ORDER BY display_order ASC, id ASC`;
+    return rows;
+  } catch (err) {
+    console.error("Error fetching process steps:", err);
+    return [];
+  }
+}
+
+export async function addProcessStep(title: string, description: string, image_url: string, display_order: number = 0) {
+  try {
+    await sql`
+      INSERT INTO process_steps (title, description, image_url, display_order)
+      VALUES (${title}, ${description}, ${image_url}, ${display_order})
+    `;
+    revalidatePath("/admin/dashboard/process");
+    revalidatePath("/");
+    return { success: true };
+  } catch (err) {
+    console.error("Error adding process step:", err);
+    return { error: "Failed to add process step" };
+  }
+}
+
+export async function deleteProcessStep(id: number) {
+  try {
+    await sql`DELETE FROM process_steps WHERE id = ${id}`;
+    revalidatePath("/admin/dashboard/process");
+    revalidatePath("/");
+    return { success: true };
+  } catch (err) {
+    console.error("Error deleting process step:", err);
+    return { error: "Failed to delete process step" };
   }
 }
 
