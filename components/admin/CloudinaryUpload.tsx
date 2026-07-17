@@ -38,25 +38,16 @@ export function CloudinaryUpload({
     setSuccess(false);
 
     try {
-      // 1. Get signature from our API
-      const signRes = await fetch("/api/cloudinary/sign", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({}),
-      });
-      
-      if (!signRes.ok) throw new Error("Failed to get upload signature");
-      
-      const { timestamp, signature } = await signRes.json();
-      const apiKey = "859238226244396"; // We can hardcode this safely on client or use env
       const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "j7fxnobg";
+      const uploadPreset = "ml_default";
 
-      // 2. Upload directly to Cloudinary
+      // Upload directly to Cloudinary using Unsigned Upload
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("api_key", apiKey);
-      formData.append("timestamp", timestamp.toString());
-      formData.append("signature", signature);
+      formData.append("upload_preset", uploadPreset);
+      if (folder) {
+        formData.append("folder", folder);
+      }
 
       const uploadRes = await fetch(
         `https://api.cloudinary.com/v1_1/${cloudName}/${resourceType}/upload`,
