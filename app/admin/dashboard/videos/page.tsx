@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getBeforeAfterVideos, deleteBeforeAfterVideo, addBeforeAfterVideo } from "@/lib/actions";
 import { AdminNav } from "@/components/admin/AdminNav";
+import { CloudinaryUpload } from "@/components/admin/CloudinaryUpload";
 import { revalidatePath } from "next/cache";
 import { Button } from "@/components/ui/Button";
 
@@ -55,14 +56,18 @@ export default async function AdminVideosPage() {
                   <label className="block text-sm font-medium text-gray-700">Title / Project Name</label>
                   <input name="title" required className="mt-1 w-full p-2 border border-gray-300 rounded-md" placeholder="e.g. Roof Crack Repair" />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Before Video URL (Link)</label>
-                  <input type="url" name="beforeUrl" required className="mt-1 w-full p-2 border border-gray-300 rounded-md" placeholder="https://youtube.com/..." />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">After Video URL (Link)</label>
-                  <input type="url" name="afterUrl" required className="mt-1 w-full p-2 border border-gray-300 rounded-md" placeholder="https://youtube.com/..." />
-                </div>
+                <CloudinaryUpload 
+                  resourceType="video"
+                  folder="before_after_videos"
+                  label="Before Video (Max 50MB)"
+                  name="beforeUrl"
+                />
+                <CloudinaryUpload 
+                  resourceType="video"
+                  folder="before_after_videos"
+                  label="After Video (Max 50MB)"
+                  name="afterUrl"
+                />
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Description</label>
                   <textarea name="description" rows={3} className="mt-1 w-full p-2 border border-gray-300 rounded-md" placeholder="Optional description..."></textarea>

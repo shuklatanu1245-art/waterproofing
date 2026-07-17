@@ -1,5 +1,6 @@
 import { getGalleryPhotos, addGalleryPhoto, deleteGalleryPhoto } from "@/lib/actions";
 import { AdminNav } from "@/components/admin/AdminNav";
+import { CloudinaryUpload } from "@/components/admin/CloudinaryUpload";
 import { revalidatePath } from "next/cache";
 
 export const dynamic = "force-dynamic";
@@ -37,10 +38,12 @@ export default async function PhotosAdmin() {
                 <label className="block text-sm font-medium text-gray-700">Project Title</label>
                 <input required type="text" name="title" className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-black" />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Image URL</label>
-                <input required type="url" name="url" placeholder="https://..." className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-black" />
-              </div>
+              <CloudinaryUpload 
+                resourceType="image"
+                folder="gallery_photos"
+                label="Project Image"
+                name="url"
+              />
               <div>
                 <label className="block text-sm font-medium text-gray-700">Display Order</label>
                 <input type="number" name="order" defaultValue={0} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-black" />
