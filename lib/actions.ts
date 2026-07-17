@@ -109,7 +109,7 @@ export async function adminLogin(password: string, email: string) {
     cookies().set("admin_session", "authenticated", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      maxAge: 60 * 60 * 24, // 1 day
+      maxAge: 60 * 60 * 24 * 30, // 30 days
       path: "/",
     });
     return { success: true };
@@ -129,11 +129,12 @@ export async function getServices() {
   }
 }
 
-export async function addService(data: { title: string, icon: string, description: string, display_order: number }) {
+export async function addService(data: { title: string, icon: string, description: string, display_order: number, image_url?: string }) {
   try {
+    const imageUrl = data.image_url || null;
     await sql`
-      INSERT INTO services (title, icon, description, display_order)
-      VALUES (${data.title}, ${data.icon}, ${data.description}, ${data.display_order})
+      INSERT INTO services (title, icon, description, display_order, image_url)
+      VALUES (${data.title}, ${data.icon}, ${data.description}, ${data.display_order}, ${imageUrl})
     `;
     return { success: true };
   } catch (error) {

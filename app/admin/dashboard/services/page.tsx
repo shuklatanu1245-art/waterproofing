@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getServices, deleteService, addService } from "@/lib/actions";
 import { AdminNav } from "@/components/admin/AdminNav";
+import { CloudinaryUpload } from "@/components/admin/CloudinaryUpload";
 import { revalidatePath } from "next/cache";
 import { Button } from "@/components/ui/Button";
 
@@ -22,12 +23,13 @@ export default async function AdminServicesPage() {
     const title = formData.get("title") as string;
     const icon = formData.get("icon") as string;
     const description = formData.get("description") as string;
-    const display_order = parseInt(formData.get("display_order") as string) || 0;
+    const displayOrder = parseInt(formData.get("displayOrder") as string) || 0;
+    const imageUrl = formData.get("imageUrl") as string;
     
-    await addService({ title, icon, description, display_order });
+    await addService({ title, icon, description, display_order: displayOrder, image_url: imageUrl });
     revalidatePath("/admin/dashboard/services");
-    revalidatePath("/services");
     revalidatePath("/");
+    revalidatePath("/services");
   }
 
   async function handleDelete(formData: FormData) {
@@ -65,8 +67,17 @@ export default async function AdminServicesPage() {
                   <textarea name="description" required rows={3} className="mt-1 w-full p-2 border border-gray-300 rounded-md" placeholder="Service description..."></textarea>
                 </div>
                 <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Service Image/Icon (Optional Custom Upload)</label>
+                  <CloudinaryUpload 
+                    resourceType="image"
+                    folder="services"
+                    label="Upload Image (replaces Lucide icon)"
+                    name="imageUrl"
+                  />
+                </div>
+                <div>
                   <label className="block text-sm font-medium text-gray-700">Display Order</label>
-                  <input type="number" name="display_order" defaultValue="0" required className="mt-1 w-full p-2 border border-gray-300 rounded-md" />
+                  <input name="displayOrder" type="number" defaultValue="0" className="mt-1 w-full p-2 border border-gray-300 rounded-md" />
                 </div>
                 <Button type="submit" variant="primary" className="w-full">Add Service</Button>
               </form>
@@ -80,15 +91,25 @@ export default async function AdminServicesPage() {
                 <h3 className="text-lg leading-6 font-medium">Manage Services</h3>
               </div>
               <ul className="divide-y divide-gray-200">
-                {(services as any[]).map((svc) => (
-                  <li key={svc.id} className="p-4 flex justify-between items-center hover:bg-gray-50">
-                    <div>
-                      <h4 className="text-md font-bold text-gray-900">{svc.title}</h4>
-                      <p className="text-sm text-gray-500">{svc.description}</p>
-                      <span className="text-xs text-gray-400">Icon: {svc.icon} | Order: {svc.display_order}</span>
+                {(services as any[]).map((service) => (
+                  <li key={service.id} className="p-4 flex flex-col md:flex-row justify-between items-start md:items-center hover:bg-gray-50 gap-4">
+                    <div className="flex gap-4 items-center">
+                      {service.image_url ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={service.image_url} alt={service.title} className="w-12 h-12 object-cover rounded-full border border-gray-200" />
+                      ) : (
+                        <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-primary font-bold">
+                          {service.icon.substring(0, 2)}
+                        </div>
+                      )}
+                      <div>
+                        <h4 className="text-md font-bold text-gray-900">{service.title}</h4>
+                        <p className="text-sm text-gray-500">{service.description}</p>
+                        <span className="text-xs text-gray-400">Icon: {service.icon} | Order: {service.display_order}</span>
+                      </div>
                     </div>
                     <form action={handleDelete}>
-                      <input type="hidden" name="id" value={svc.id} />
+                      <input type="hidden" name="id" value={service.id} />
                       <Button type="submit" variant="outline" className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700">
                         Delete
                       </Button>

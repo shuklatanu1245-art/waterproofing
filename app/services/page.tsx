@@ -24,9 +24,16 @@ export default async function ServicesPage() {
                 key={service.id}
                 className="bg-white p-8 rounded-xl shadow-sm hover:shadow-xl transition-all border border-gray-100 group flex flex-col"
               >
-                <div className="w-16 h-16 bg-blue-50 text-accent rounded-full flex items-center justify-center mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
-                  <DynamicIcon name={service.icon} className="w-8 h-8" />
-                </div>
+                {service.image_url ? (
+                  <div className="w-16 h-16 mb-6 rounded-xl overflow-hidden relative border border-gray-100 shadow-sm">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={service.image_url} alt={service.title} className="w-full h-full object-cover" />
+                  </div>
+                ) : (
+                  <div className="w-16 h-16 bg-blue-50 text-accent rounded-full flex items-center justify-center mb-6 group-hover:bg-accent group-hover:text-white transition-colors">
+                    <DynamicIcon name={service.icon} className="w-8 h-8" />
+                  </div>
+                )}
                 <h3 className="text-xl font-bold text-primary mb-3">{service.title}</h3>
                 <p className="text-gray-600 mb-8 flex-grow">{service.description}</p>
                 <Link href="/contact" className="mt-auto">
