@@ -22,6 +22,16 @@ export function BeforeAfterGallery({ videos = [] }: BeforeAfterGalleryProps) {
     }
   ];
 
+  // Helper to add Cloudinary optimizations to the raw URL
+  const optimizeCloudinaryVideo = (url: string) => {
+    if (!url) return "";
+    // If it's a cloudinary URL, insert transformations for quality, format, and resizing
+    if (url.includes("res.cloudinary.com") && url.includes("/upload/")) {
+      return url.replace("/upload/", "/upload/q_auto,f_auto,w_800/");
+    }
+    return url;
+  };
+
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,7 +59,7 @@ export function BeforeAfterGallery({ videos = [] }: BeforeAfterGalleryProps) {
               className="relative rounded-2xl overflow-hidden shadow-lg bg-gray-100 aspect-video flex items-center justify-center border-4 border-gray-200"
             >
               {video.before_video_url ? (
-                <video src={video.before_video_url} autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover" />
+                <video src={optimizeCloudinaryVideo(video.before_video_url)} autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover" />
               ) : (
                 <div className="text-gray-400 text-center p-4">
                   <span className="block font-bold text-xl mb-2">Before</span>
@@ -69,7 +79,7 @@ export function BeforeAfterGallery({ videos = [] }: BeforeAfterGalleryProps) {
               className="relative rounded-2xl overflow-hidden shadow-lg bg-gray-100 aspect-video flex items-center justify-center border-4 border-accent"
             >
               {video.after_video_url ? (
-                <video src={video.after_video_url} autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover" />
+                <video src={optimizeCloudinaryVideo(video.after_video_url)} autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover" />
               ) : (
                 <div className="text-gray-400 text-center p-4">
                   <span className="block font-bold text-xl mb-2">After</span>
