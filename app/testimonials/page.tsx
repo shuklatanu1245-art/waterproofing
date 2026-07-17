@@ -3,46 +3,13 @@
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 
-const allTestimonials = [
-  {
-    id: 1,
-    name: "Rajesh Kumar",
-    role: "Homeowner",
-    text: "We had severe leakage in our terrace for years. AquaProtect fixed it completely within 3 days. It's been raining heavily and there is zero dampness. Highly recommended!",
-  },
-  {
-    id: 2,
-    name: "Anita Sharma",
-    role: "Apartment Secretary",
-    text: "Very professional team. They inspected our entire building and provided a very cost-effective waterproofing solution for the exterior walls. The quality of work is excellent.",
-  },
-  {
-    id: 3,
-    name: "Vikram Singh",
-    role: "Business Owner",
-    text: "I hired them for basement waterproofing of my warehouse. They used high-grade chemicals and the problem is permanently solved. Great service and timely execution.",
-  },
-  {
-    id: 4,
-    name: "Meera Patel",
-    role: "Villa Owner",
-    text: "The bathroom leakage was ruining our adjoining bedroom walls. The team did an injection grouting treatment without breaking any tiles. Fantastic modern approach!",
-  },
-  {
-    id: 5,
-    name: "Suresh Menon",
-    role: "Factory Manager",
-    text: "Industrial roof waterproofing done perfectly. They handled the large area with ease and completed the project before the deadline. We are extremely satisfied.",
-  },
-  {
-    id: 6,
-    name: "Priya Desai",
-    role: "Homeowner",
-    text: "Affordable and transparent pricing. The free inspection was very detailed, and they explained exactly what was causing the dampness. The final result is flawless.",
-  },
-];
+import { getTestimonials } from "@/lib/actions";
+import { FeedbackForm } from "@/components/sections/FeedbackForm";
 
-export default function TestimonialsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function TestimonialsPage() {
+  const allTestimonials = await getTestimonials();
   return (
     <div className="pt-20 bg-background min-h-screen">
       <div className="bg-primary text-white py-20 text-center">
@@ -80,6 +47,13 @@ export default function TestimonialsPage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Feedback Form Section */}
+      <section className="py-20 bg-gray-50 border-t border-gray-200">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FeedbackForm />
         </div>
       </section>
     </div>

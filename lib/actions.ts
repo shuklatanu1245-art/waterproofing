@@ -67,6 +67,24 @@ export async function submitContact(data: { name: string, phone: string, email?:
   }
 }
 
+export async function submitFeedback(data: { name: string, phone: string, message: string }) {
+  try {
+    await sql`
+      INSERT INTO submissions (type, name, phone, message)
+      VALUES (
+        'Feedback', 
+        ${data.name}, 
+        ${data.phone}, 
+        ${data.message}
+      )
+    `;
+    return { success: true };
+  } catch (error) {
+    console.error("Error submitting feedback:", error);
+    return { success: false };
+  }
+}
+
 export async function getSubmissions() {
   try {
     const { rows } = await sql`SELECT * FROM submissions ORDER BY created_at DESC`;
