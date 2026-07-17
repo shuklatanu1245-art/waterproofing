@@ -8,7 +8,7 @@ cloudinary.config({
   api_secret: "nmKZ00hfpghmOSasvjDEbpE21t0",
 });
 
-export async function POST(request: Request) {
+export async function POST() {
   // Ensure user is authenticated as admin
   const cookieStore = cookies();
   const session = cookieStore.get("admin_session");
