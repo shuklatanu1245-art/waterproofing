@@ -2,6 +2,12 @@ import { v2 as cloudinary } from "cloudinary";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
+cloudinary.config({
+  cloud_name: "j7fxnobg",
+  api_key: "859238226244396",
+  api_secret: "nmKZ00hfpghmOSasvjDEbpE21t0",
+});
+
 export async function POST(request: Request) {
   // Ensure user is authenticated as admin
   const cookieStore = cookies();
