@@ -51,7 +51,7 @@ export function BeforeAfterGallery({ videos = [] }: BeforeAfterGalleryProps) {
             >
               {video.before_video_url ? (
                 // @ts-expect-error - ReactPlayer props are sometimes not fully typed
-                <ReactPlayer url={video.before_video_url} width="100%" height="100%" controls className="absolute top-0 left-0" />
+                <ReactPlayer url={video.before_video_url} width="100%" height="100%" playing loop muted playsinline className="absolute top-0 left-0" />
               ) : (
                 <div className="text-gray-400 text-center p-4">
                   <span className="block font-bold text-xl mb-2">Before</span>
@@ -72,7 +72,7 @@ export function BeforeAfterGallery({ videos = [] }: BeforeAfterGalleryProps) {
             >
               {video.after_video_url ? (
                 // @ts-expect-error - ReactPlayer props are sometimes not fully typed
-                <ReactPlayer url={video.after_video_url} width="100%" height="100%" controls className="absolute top-0 left-0" />
+                <ReactPlayer url={video.after_video_url} width="100%" height="100%" playing loop muted playsinline className="absolute top-0 left-0" />
               ) : (
                 <div className="text-gray-400 text-center p-4">
                   <span className="block font-bold text-xl mb-2">After</span>
