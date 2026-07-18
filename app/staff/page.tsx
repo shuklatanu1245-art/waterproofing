@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { adminLogin } from "@/lib/actions";
+import { staffLogin } from "@/lib/actions";
 import { Button } from "@/components/ui/Button";
 import { Eye, EyeOff } from "lucide-react";
 
-export default function AdminLoginPage() {
-  const [email, setEmail] = useState("");
+export default function StaffLoginPage() {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -19,13 +19,13 @@ export default function AdminLoginPage() {
     setLoading(true);
     setError("");
     
-    const res = await adminLogin(password, email);
+    const res = await staffLogin(password, username);
     
     if (res.success) {
-      router.push("/admin/dashboard");
-      router.refresh(); // Ensure the layout picks up the new cookie if needed
+      router.push("/staff/dashboard");
+      router.refresh(); 
     } else {
-      setError("Invalid email or password");
+      setError("Invalid username or password");
       setLoading(false);
     }
   };
@@ -33,21 +33,21 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <h2 className="text-3xl font-extrabold text-primary">Admin Panel</h2>
-        <p className="mt-2 text-gray-600">Secure access to inquiries</p>
+        <h2 className="text-3xl font-extrabold text-primary">Staff Panel</h2>
+        <p className="mt-2 text-gray-600">Login to manage orders and inquiries</p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-gray-100">
           <form className="space-y-6" onSubmit={handleLogin}>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Email address</label>
+              <label className="block text-sm font-medium text-gray-700">Username</label>
               <div className="mt-1">
                 <input
-                  type="email"
+                  type="text"
                   required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
                 />
               </div>

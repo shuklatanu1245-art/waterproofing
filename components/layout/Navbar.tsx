@@ -17,6 +17,7 @@ export function Navbar() {
     { name: "Testimonials", href: "/testimonials" },
     { name: "FAQs", href: "/faq" },
     { name: "Contact Us", href: "/contact" },
+    { name: "Staff Panel", href: "/staff" },
   ];
 
   return (

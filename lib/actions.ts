@@ -27,6 +27,13 @@ export async function createTable() {
         display_order INTEGER DEFAULT 0,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
+      CREATE TABLE IF NOT EXISTS staff_users (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        username VARCHAR(255) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
     `;
     return { success: true, message: "Table created successfully" };
   } catch (error) {
@@ -115,6 +122,36 @@ export async function adminLogin(password: string, email: string) {
     return { success: true };
   }
   return { success: false };
+}
+
+export async function adminLogout() {
+  cookies().delete("admin_session");
+  return { success: true };
+}
+
+// Staff Authentication
+export async function staffLogin(password: string, username: string) {
+  try {
+    const { rows } = await sql`SELECT * FROM staff_users WHERE username = ${username} AND password = ${password}`;
+    if (rows.length > 0) {
+      cookies().set("staff_session", "authenticated", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 60 * 60 * 24 * 30, // 30 days persistent login
+        path: "/",
+      });
+      return { success: true };
+    }
+    return { success: false };
+  } catch (err) {
+    console.error("Error during staff login:", err);
+    return { success: false };
+  }
+}
+
+export async function staffLogout() {
+  cookies().delete("staff_session");
+  return { success: true };
 }
 
 // CMS Actions - Services
@@ -306,7 +343,44 @@ export async function deleteProcessStep(id: number) {
   }
 }
 
-export async function adminLogout() {
-  cookies().delete("admin_session");
-  return { success: true };
+// CMS Actions - Staff Users
+export async function getStaff() {
+  noStore();
+  try {
+    const { rows } = await sql`SELECT id, name, username, created_at FROM staff_users ORDER BY created_at DESC`;
+    return rows;
+  } catch (err) {
+    console.error("Error fetching staff:", err);
+    return [];
+  }
+}
+
+export async function addStaff(name: string, username: string, password: string) {
+  try {
+    // Check if username already exists
+    const existing = await sql`SELECT * FROM staff_users WHERE username = ${username}`;
+    if (existing.rows.length > 0) {
+      return { error: "Username already exists" };
+    }
+    await sql`
+      INSERT INTO staff_users (name, username, password)
+      VALUES (${name}, ${username}, ${password})
+    `;
+    revalidatePath("/admin/dashboard/staff");
+    return { success: true };
+  } catch (err) {
+    console.error("Error adding staff:", err);
+    return { error: "Failed to add staff member" };
+  }
+}
+
+export async function deleteStaff(id: number) {
+  try {
+    await sql`DELETE FROM staff_users WHERE id = ${id}`;
+    revalidatePath("/admin/dashboard/staff");
+    return { success: true };
+  } catch (err) {
+    console.error("Error deleting staff:", err);
+    return { error: "Failed to delete staff member" };
+  }
 }
