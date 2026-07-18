@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { getLogo, updateLogo } from "@/lib/actions";
 import { AdminNav } from "@/components/admin/AdminNav";
-import CloudinaryUpload from "@/components/admin/CloudinaryUpload";
+import { CloudinaryUpload } from "@/components/admin/CloudinaryUpload";
 import { Button } from "@/components/ui/Button";
 
 export default function SettingsPage() {
@@ -44,7 +44,7 @@ export default function SettingsPage() {
             <div className="max-w-xl">
               <h4 className="text-md font-bold text-gray-900 mb-4">Website Logo</h4>
               <p className="text-sm text-gray-500 mb-6">
-                Upload a custom logo to display in the menu bar and footer. If no logo is set, the text "Syon Enterprises" will be displayed.
+                Upload a custom logo to display in the menu bar and footer. If no logo is set, the text &quot;Syon Enterprises&quot; will be displayed.
               </p>
               
               {loading ? (
@@ -58,23 +58,25 @@ export default function SettingsPage() {
                       <div className="border border-gray-200 rounded-md p-4 bg-gray-50 inline-block">
                         <img src={logo} alt="Current Logo" className="max-h-16 object-contain" />
                       </div>
-                      <div className="flex space-x-4">
+                      <div className="flex space-x-4 mt-4">
                         <CloudinaryUpload
-                          onUpload={handleUpload}
-                          buttonText="Replace Logo"
+                          onUploadSuccess={handleUpload}
+                          label="Replace Logo"
                           folder="waterproofing/settings"
                         />
-                        <Button variant="outline" onClick={handleDelete} className="text-red-600 border-red-200 hover:bg-red-50">
-                          Remove Logo
-                        </Button>
+                        <div className="mt-8">
+                          <Button variant="outline" onClick={handleDelete} className="text-red-600 border-red-200 hover:bg-red-50">
+                            Remove Logo
+                          </Button>
+                        </div>
                       </div>
                     </div>
                   ) : (
                     <div>
                       <div className="mb-4 text-sm font-medium text-gray-900">Current Logo: <span className="font-bold text-primary italic">Syon Enterprises (Text)</span></div>
                       <CloudinaryUpload
-                        onUpload={handleUpload}
-                        buttonText="Upload Image Logo"
+                        onUploadSuccess={handleUpload}
+                        label="Upload Image Logo"
                         folder="waterproofing/settings"
                       />
                     </div>
