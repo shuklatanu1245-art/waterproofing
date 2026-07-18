@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { MapPin, Phone, Mail } from "lucide-react";
 
-export function Footer() {
+export function Footer({ logo }: { logo?: string | null }) {
   return (
     <footer className="bg-primary text-white pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,7 +10,11 @@ export function Footer() {
           {/* Company Info */}
           <div>
             <Link href="/" className="text-2xl font-bold text-white mb-4 block">
-              Syon Enterprises<span className="text-accent">.</span>
+              {logo ? (
+                <img src={logo} alt="Syon Enterprises Logo" className="h-12 object-contain" />
+              ) : (
+                <>Syon Enterprises<span className="text-accent">.</span></>
+              )}
             </Link>
             <p className="text-gray-300 mb-6 leading-relaxed">
               Stop water leakage before it causes serious damage. Professional waterproofing solutions for homes, apartments, offices & commercial buildings.

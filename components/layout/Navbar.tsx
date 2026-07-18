@@ -5,7 +5,7 @@ import { Menu, X, Phone } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export function Navbar() {
+export function Navbar({ logo }: { logo?: string | null }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const links = [
@@ -24,8 +24,12 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="text-2xl font-bold text-primary">
-              Syon Enterprises<span className="text-accent">.</span>
+            <Link href="/" className="text-2xl font-bold text-primary flex items-center">
+              {logo ? (
+                <img src={logo} alt="Syon Enterprises Logo" className="h-10 object-contain" />
+              ) : (
+                <>Syon Enterprises<span className="text-accent">.</span></>
+              )}
             </Link>
           </div>
           <div className="hidden lg:flex lg:space-x-8 items-center">

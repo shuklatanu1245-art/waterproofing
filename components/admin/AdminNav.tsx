@@ -13,6 +13,7 @@ export function AdminNav() {
     { name: "Process Steps", href: "/admin/dashboard/process" },
     { name: "Before & After Videos", href: "/admin/dashboard/videos" },
     { name: "Manage Staff", href: "/admin/dashboard/staff" },
+    { name: "Settings", href: "/admin/dashboard/settings" },
   ];
 
   return (

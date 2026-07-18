@@ -34,6 +34,10 @@ export async function createTable() {
         password VARCHAR(255) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
+      CREATE TABLE IF NOT EXISTS site_settings (
+        id SERIAL PRIMARY KEY,
+        logo_url VARCHAR(500)
+      );
     `;
     return { success: true, message: "Table created successfully" };
   } catch (error) {
@@ -382,5 +386,35 @@ export async function deleteStaff(id: number) {
   } catch (err) {
     console.error("Error deleting staff:", err);
     return { error: "Failed to delete staff member" };
+  }
+}
+
+// CMS Actions - Site Settings
+export async function getLogo() {
+  noStore();
+  try {
+    const { rows } = await sql`SELECT logo_url FROM site_settings WHERE id = 1`;
+    if (rows.length > 0) {
+      return rows[0].logo_url;
+    }
+    return null;
+  } catch (err) {
+    console.error("Error fetching logo:", err);
+    return null;
+  }
+}
+
+export async function updateLogo(url: string | null) {
+  try {
+    const { rowCount } = await sql`UPDATE site_settings SET logo_url = ${url} WHERE id = 1`;
+    if (rowCount === 0) {
+      await sql`INSERT INTO site_settings (id, logo_url) VALUES (1, ${url})`;
+    }
+    revalidatePath("/");
+    revalidatePath("/admin/dashboard/settings");
+    return { success: true };
+  } catch (err) {
+    console.error("Error updating logo:", err);
+    return { success: false };
   }
 }
