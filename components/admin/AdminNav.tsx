@@ -18,7 +18,7 @@ export function AdminNav() {
   return (
     <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4 border-b border-gray-200 pb-4">
       <div className="flex items-center space-x-6">
-        <h1 className="text-2xl font-bold text-primary mr-4">Admin Panel</h1>
+        <h1 className="text-2xl font-bold text-primary mr-4">Owner Panel</h1>
         <nav className="flex space-x-4">
           {links.map((link) => (
             <Link

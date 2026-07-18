@@ -20,10 +20,10 @@ export default async function AdminStaffPage() {
   async function handleAdd(formData: FormData) {
     "use server";
     const name = formData.get("name") as string;
-    const username = formData.get("username") as string;
+    const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     
-    await addStaff(name, username, password);
+    await addStaff(name, email, password);
     revalidatePath("/admin/dashboard/staff");
   }
 
@@ -50,8 +50,8 @@ export default async function AdminStaffPage() {
                   <input type="text" name="name" required className="mt-1 w-full p-2 border border-gray-300 rounded-md" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Username</label>
-                  <input type="text" name="username" required className="mt-1 w-full p-2 border border-gray-300 rounded-md" />
+                  <label className="block text-sm font-medium text-gray-700">Email address</label>
+                  <input type="email" name="email" required className="mt-1 w-full p-2 border border-gray-300 rounded-md" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Password</label>
@@ -74,7 +74,7 @@ export default async function AdminStaffPage() {
                   <li key={user.id} className="p-4 flex justify-between items-center hover:bg-gray-50">
                     <div>
                       <h4 className="text-md font-bold text-gray-900">{user.name}</h4>
-                      <p className="text-sm text-gray-500">Username: {user.username}</p>
+                      <p className="text-sm text-gray-500">Email: {user.email}</p>
                     </div>
                     <form action={handleDelete}>
                       <input type="hidden" name="id" value={user.id} />

@@ -17,7 +17,6 @@ export function Navbar() {
     { name: "Testimonials", href: "/testimonials" },
     { name: "FAQs", href: "/faq" },
     { name: "Contact Us", href: "/contact" },
-    { name: "Staff Panel", href: "/staff" },
   ];
 
   return (
@@ -44,6 +43,18 @@ export function Navbar() {
               className="bg-accent text-white px-5 py-2.5 rounded-full font-medium hover:bg-orange-600 transition-colors shadow-md flex items-center gap-2"
             >
               Get Free Quote
+            </Link>
+            <Link
+              href="/staff"
+              className="text-primary hover:text-accent font-medium text-sm transition-colors ml-4"
+            >
+              Staff Panel
+            </Link>
+            <Link
+              href="/admin"
+              className="text-primary hover:text-accent font-medium text-sm transition-colors ml-4"
+            >
+              Owner Panel
             </Link>
           </div>
           <div className="flex items-center lg:hidden gap-4">
@@ -82,7 +93,7 @@ export function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <div className="pt-4 px-3">
+              <div className="pt-4 px-3 space-y-3">
                 <Link
                   href="/contact"
                   onClick={() => setIsOpen(false)}
@@ -90,6 +101,22 @@ export function Navbar() {
                 >
                   Get Free Quote
                 </Link>
+                <div className="flex justify-center gap-4 pt-4 border-t border-gray-100">
+                  <Link
+                    href="/staff"
+                    onClick={() => setIsOpen(false)}
+                    className="text-primary hover:text-accent font-medium text-sm"
+                  >
+                    Staff Panel
+                  </Link>
+                  <Link
+                    href="/admin"
+                    onClick={() => setIsOpen(false)}
+                    className="text-primary hover:text-accent font-medium text-sm"
+                  >
+                    Owner Panel
+                  </Link>
+                </div>
               </div>
             </div>
           </motion.div>

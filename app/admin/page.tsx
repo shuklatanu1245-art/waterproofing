@@ -33,7 +33,7 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <h2 className="text-3xl font-extrabold text-primary">Admin Panel</h2>
+        <h2 className="text-3xl font-extrabold text-primary">Owner Panel</h2>
         <p className="mt-2 text-gray-600">Secure access to inquiries</p>
       </div>
 

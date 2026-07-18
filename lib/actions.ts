@@ -30,7 +30,7 @@ export async function createTable() {
       CREATE TABLE IF NOT EXISTS staff_users (
         id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
-        username VARCHAR(255) UNIQUE NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
         password VARCHAR(255) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
@@ -130,9 +130,9 @@ export async function adminLogout() {
 }
 
 // Staff Authentication
-export async function staffLogin(password: string, username: string) {
+export async function staffLogin(password: string, email: string) {
   try {
-    const { rows } = await sql`SELECT * FROM staff_users WHERE username = ${username} AND password = ${password}`;
+    const { rows } = await sql`SELECT * FROM staff_users WHERE email = ${email} AND password = ${password}`;
     if (rows.length > 0) {
       cookies().set("staff_session", "authenticated", {
         httpOnly: true,
@@ -347,7 +347,7 @@ export async function deleteProcessStep(id: number) {
 export async function getStaff() {
   noStore();
   try {
-    const { rows } = await sql`SELECT id, name, username, created_at FROM staff_users ORDER BY created_at DESC`;
+    const { rows } = await sql`SELECT id, name, email, created_at FROM staff_users ORDER BY created_at DESC`;
     return rows;
   } catch (err) {
     console.error("Error fetching staff:", err);
@@ -355,16 +355,16 @@ export async function getStaff() {
   }
 }
 
-export async function addStaff(name: string, username: string, password: string) {
+export async function addStaff(name: string, email: string, password: string) {
   try {
-    // Check if username already exists
-    const existing = await sql`SELECT * FROM staff_users WHERE username = ${username}`;
+    // Check if email already exists
+    const existing = await sql`SELECT * FROM staff_users WHERE email = ${email}`;
     if (existing.rows.length > 0) {
-      return { error: "Username already exists" };
+      return { error: "Email already exists" };
     }
     await sql`
-      INSERT INTO staff_users (name, username, password)
-      VALUES (${name}, ${username}, ${password})
+      INSERT INTO staff_users (name, email, password)
+      VALUES (${name}, ${email}, ${password})
     `;
     revalidatePath("/admin/dashboard/staff");
     return { success: true };

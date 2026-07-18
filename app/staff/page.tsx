@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Eye, EyeOff } from "lucide-react";
 
 export default function StaffLoginPage() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -19,7 +19,7 @@ export default function StaffLoginPage() {
     setLoading(true);
     setError("");
     
-    const res = await staffLogin(password, username);
+    const res = await staffLogin(password, email);
     
     if (res.success) {
       router.push("/staff/dashboard");
@@ -41,13 +41,13 @@ export default function StaffLoginPage() {
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-gray-100">
           <form className="space-y-6" onSubmit={handleLogin}>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Username</label>
+              <label className="block text-sm font-medium text-gray-700">Email address</label>
               <div className="mt-1">
                 <input
-                  type="text"
+                  type="email"
                   required
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
                 />
               </div>
