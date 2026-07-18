@@ -12,9 +12,10 @@ export function TestimonialCarousel({ testimonials = [] }: TestimonialCarouselPr
   const displayTestimonials = testimonials.length > 0 ? testimonials : [
     {
       id: 1,
-      name: "Placeholder Client",
-      role: "Customer",
-      text: "We had a great experience with AquaProtect. Highly recommended!"
+      name: "Ramesh Sharma",
+      role: "Homeowner",
+      text: "We had a great experience with Syon Enterprises. Highly recommended!",
+      rating: 5,
     }
   ];
   return (

@@ -9,8 +9,8 @@ export function Footer() {
           
           {/* Company Info */}
           <div>
-            <Link href="/" className="text-2xl font-bold text-white mb-6 inline-block">
-              AquaProtect<span className="text-accent">.</span>
+            <Link href="/" className="text-2xl font-bold text-white mb-4 block">
+              Syon Enterprises<span className="text-accent">.</span>
             </Link>
             <p className="text-gray-300 mb-6 leading-relaxed">
               Stop water leakage before it causes serious damage. Professional waterproofing solutions for homes, apartments, offices & commercial buildings.
@@ -96,9 +96,9 @@ export function Footer() {
 
         </div>
 
-        <div className="border-t border-gray-700 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} AquaProtect Waterproofing Services. All rights reserved.</p>
-          <div className="mt-4 md:mt-0 flex space-x-4">
+        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p>&copy; {new Date().getFullYear()} Syon Enterprises. All rights reserved.</p>
+          <div className="flex space-x-4 mt-4 md:mt-0">
             <Link href="/privacy" className="hover:text-accent transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-accent transition-colors">Terms of Service</Link>
           </div>

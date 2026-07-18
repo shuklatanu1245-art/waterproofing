@@ -11,7 +11,7 @@ export default function AboutPage() {
       <div className="bg-primary text-white py-20 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">About Us</h1>
         <p className="text-xl text-gray-300 max-w-2xl mx-auto px-4">
-          Learn more about our mission, vision, and the team behind AquaProtect.
+          Learn more about our mission, vision, and the team behind Syon Enterprises.
         </p>
       </div>
 

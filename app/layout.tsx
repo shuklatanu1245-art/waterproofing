@@ -9,7 +9,7 @@ import { HiddenAdminButton } from "@/components/ui/HiddenAdminButton";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "AquaProtect | Professional Waterproofing Services",
+  title: "Syon Enterprises | Professional Waterproofing Services",
   description: "Stop water leakage before it causes serious damage. Professional waterproofing solutions for homes, apartments, offices & commercial buildings.",
 };
 

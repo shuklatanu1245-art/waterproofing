@@ -25,7 +25,7 @@ export function Navbar() {
         <div className="flex justify-between items-center h-20">
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="text-2xl font-bold text-primary">
-              AquaProtect<span className="text-accent">.</span>
+              Syon Enterprises<span className="text-accent">.</span>
             </Link>
           </div>
           <div className="hidden lg:flex lg:space-x-8 items-center">
