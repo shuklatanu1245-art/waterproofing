@@ -1,0 +1,1 @@
+import { sql } from '@vercel/postgres'; import 'dotenv/config'; async function run() { const {rows} = await sql\SELECT id, title, display_order, image_url FROM services ORDER BY display_order ASC\; console.log(rows); } run();

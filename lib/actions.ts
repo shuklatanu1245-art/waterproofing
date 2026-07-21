@@ -391,7 +391,6 @@ export async function deleteStaff(id: number) {
 
 // CMS Actions - Site Settings
 export async function getLogo() {
-  noStore();
   try {
     const { rows } = await sql`SELECT logo_url FROM site_settings WHERE id = 1`;
     if (rows.length > 0) {

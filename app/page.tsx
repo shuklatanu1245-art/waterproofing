@@ -11,17 +11,18 @@ import { getServices, getBeforeAfterVideos, getTestimonials, getProcessSteps } f
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const allServices = await getServices();
-  const topServices = allServices.slice(0, 6);
-  const videos = await getBeforeAfterVideos();
-  const testimonials = await getTestimonials();
-  const processSteps = await getProcessSteps();
+  const [allServices, videos, testimonials, processSteps] = await Promise.all([
+    getServices(),
+    getBeforeAfterVideos(),
+    getTestimonials(),
+    getProcessSteps()
+  ]);
 
   return (
     <>
       <Hero />
       <HomeAbout />
-      <HomeServices services={topServices} />
+      <HomeServices services={allServices} />
       <WhyChooseUs />
       <Process steps={processSteps} />
       <BeforeAfterGallery videos={videos} />
