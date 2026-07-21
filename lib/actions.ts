@@ -160,7 +160,6 @@ export async function staffLogout() {
 
 // CMS Actions - Services
 export async function getServices() {
-  noStore();
   try {
     const { rows } = await sql`SELECT * FROM services ORDER BY display_order ASC`;
     return rows;
@@ -196,7 +195,6 @@ export async function deleteService(id: number) {
 
 // CMS Actions - Before/After Videos
 export async function getBeforeAfterVideos() {
-  noStore();
   try {
     const { rows } = await sql`SELECT * FROM before_after_videos ORDER BY created_at DESC`;
     return rows;
@@ -233,7 +231,6 @@ export async function deleteBeforeAfterVideo(id: number) {
 }
 
 export async function getTestimonials() {
-  noStore();
   try {
     const { rows } = await sql`SELECT * FROM testimonials ORDER BY created_at DESC`;
     return rows;
@@ -271,7 +268,6 @@ export async function deleteTestimonial(id: number) {
 }
 
 export async function getGalleryPhotos() {
-  noStore();
   try {
     const { rows } = await sql`SELECT * FROM gallery_photos ORDER BY display_order ASC`;
     return rows;
@@ -310,7 +306,6 @@ export async function deleteGalleryPhoto(id: number) {
 
 // CMS Actions - Process Steps
 export async function getProcessSteps() {
-  noStore();
   try {
     const { rows } = await sql`SELECT * FROM process_steps ORDER BY display_order ASC, id ASC`;
     return rows;
@@ -349,7 +344,6 @@ export async function deleteProcessStep(id: number) {
 
 // CMS Actions - Staff Users
 export async function getStaff() {
-  noStore();
   try {
     const { rows } = await sql`SELECT id, name, email, created_at FROM staff_users ORDER BY created_at DESC`;
     return rows;
