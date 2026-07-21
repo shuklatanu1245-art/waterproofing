@@ -64,7 +64,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
               { label: "Years Experience", value: "5+" },
-              { label: "Projects Completed", value: "1200+" },
+              { label: "Projects Completed", value: "200+" },
               { label: "Cities Covered", value: "5" },
               { label: "Happy Clients", value: "98%" }
             ].map((stat, i) => (
@@ -113,34 +113,6 @@ export default function AboutPage() {
                 To be the most trusted and preferred waterproofing company in the region, known for our technological advancements, unmatched quality, and customer-first approach.
               </p>
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Team */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading title="Meet Our Experts" centered />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            {[1, 2, 3].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="bg-white rounded-xl overflow-hidden shadow-sm"
-              >
-                <div className="h-64 bg-gray-200 flex items-center justify-center">
-                  <Users className="w-16 h-16 text-gray-400" />
-                </div>
-                <div className="p-6 text-center">
-                  <h4 className="text-lg font-bold text-primary">Team Member {i}</h4>
-                  <p className="text-accent mb-2">Waterproofing Specialist</p>
-                  <p className="text-sm text-gray-500">10+ years of experience in structural waterproofing and crack repair.</p>
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
