@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { CheckCircle2, Shield, Target, Users } from "lucide-react";
+import { CheckCircle2, Shield, Target } from "lucide-react";
 
 export default function AboutPage() {
   return (
