@@ -8,7 +8,7 @@ import { TestimonialCarousel } from "@/components/sections/TestimonialCarousel";
 import { LeadGenForm } from "@/components/forms/LeadGenForm";
 import { getServices, getBeforeAfterVideos, getTestimonials, getProcessSteps } from "@/lib/actions";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 10;
 
 export default async function Home() {
   const [allServices, videos, testimonials, processSteps] = await Promise.all([
