@@ -11,6 +11,7 @@ export function AdminNav() {
     { name: "Inquiries", href: "/admin/dashboard" },
     { name: "Services", href: "/admin/dashboard/services" },
     { name: "Process Steps", href: "/admin/dashboard/process" },
+    { name: "Completed Projects", href: "/admin/dashboard/projects" },
     { name: "Before & After Videos", href: "/admin/dashboard/videos" },
     { name: "Manage Staff", href: "/admin/dashboard/staff" },
     { name: "Settings", href: "/admin/dashboard/settings" },

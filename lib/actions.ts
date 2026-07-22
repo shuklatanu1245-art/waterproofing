@@ -1,7 +1,7 @@
 "use server";
 
 import { sql } from "@vercel/postgres";
-import { revalidatePath, unstable_noStore as noStore } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export async function createTable() {
@@ -408,6 +408,45 @@ export async function updateLogo(url: string | null) {
     return { success: true };
   } catch (err) {
     console.error("Error updating logo:", err);
+    return { success: false };
+  }
+}
+
+// CMS Actions - Projects
+export async function getProjects() {
+  try {
+    const { rows } = await sql`SELECT * FROM projects ORDER BY created_at DESC`;
+    return rows;
+  } catch (err) {
+    console.error("Error fetching projects:", err);
+    return [];
+  }
+}
+
+export async function addProject(data: { name: string, location: string, service: string, date: string, category: string, imageUrl: string, videoUrl?: string }) {
+  try {
+    const videoUrl = data.videoUrl || null;
+    await sql`
+      INSERT INTO projects (name, location, service, completion_date, category, image_url, video_url)
+      VALUES (${data.name}, ${data.location}, ${data.service}, ${data.date}, ${data.category}, ${data.imageUrl}, ${videoUrl})
+    `;
+    revalidatePath("/admin/dashboard/projects");
+    revalidatePath("/projects");
+    return { success: true };
+  } catch (error) {
+    console.error("Error adding project:", error);
+    return { success: false };
+  }
+}
+
+export async function deleteProject(id: number) {
+  try {
+    await sql`DELETE FROM projects WHERE id = ${id}`;
+    revalidatePath("/admin/dashboard/projects");
+    revalidatePath("/projects");
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting project:", error);
     return { success: false };
   }
 }
