@@ -12,6 +12,43 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata: Metadata = {
   title: "Syon Enterprises | Professional Waterproofing Services",
   description: "Stop water leakage before it causes serious damage. Professional waterproofing solutions for homes, apartments, offices & commercial buildings.",
+  keywords: [
+    "Best waterproofing services",
+    "Roof waterproofing contractors",
+    "Water leakage solution",
+    "Basement waterproofing experts",
+    "Terrace waterproofing company",
+    "Crack filling and repair services",
+    "Industrial waterproofing contractors",
+    "Swimming pool waterproofing",
+    "Damp proofing treatments",
+    "Chemical waterproofing solutions",
+    "Waterproofing experts near me",
+    "Professional waterproofing company"
+  ],
+  openGraph: {
+    title: "Syon Enterprises | Professional Waterproofing Services",
+    description: "Professional waterproofing solutions for homes, apartments, offices & commercial buildings. Stop water leakage today.",
+    type: "website",
+    locale: "en_US",
+    siteName: "Syon Enterprises",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Syon Enterprises | Professional Waterproofing Services",
+    description: "Professional waterproofing solutions for homes, apartments, offices & commercial buildings.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default async function RootLayout({
