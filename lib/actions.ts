@@ -116,7 +116,7 @@ export async function getSubmissions() {
 
 // Admin Authentication Server Actions
 export async function adminLogin(password: string, email: string) {
-  if (email === "shuklatanu1245@gmail.com" && password === "water5454") {
+  if (email === "praveengoswami.in.@gmail.com" && password === "Password2012") {
     cookies().set("admin_session", "authenticated", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
