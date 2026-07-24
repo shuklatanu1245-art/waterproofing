@@ -11,12 +11,10 @@ import { getServices, getBeforeAfterVideos, getTestimonials, getProcessSteps } f
 export const revalidate = 10;
 
 export default async function Home() {
-  const [allServices, videos, testimonials, processSteps] = await Promise.all([
-    getServices(),
-    getBeforeAfterVideos(),
-    getTestimonials(),
-    getProcessSteps()
-  ]);
+  const allServices = await getServices();
+  const videos = await getBeforeAfterVideos();
+  const testimonials = await getTestimonials();
+  const processSteps = await getProcessSteps();
 
   return (
     <>

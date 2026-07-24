@@ -110,7 +110,7 @@ export async function getSubmissions() {
     return rows;
   } catch (error) {
     console.error("Error fetching submissions:", error);
-    return [];
+    throw error;
   }
 }
 
@@ -147,7 +147,7 @@ export async function staffLogin(password: string, email: string) {
       return { success: true };
     }
     return { success: false };
-  } catch (err) {
+  } catch (error) {
     console.error("Error during staff login:", err);
     return { success: false };
   }
@@ -165,7 +165,7 @@ export async function getServices() {
     return rows;
   } catch (error) {
     console.error("Error fetching services:", error);
-    return [];
+    throw error;
   }
 }
 
@@ -200,7 +200,7 @@ export async function getBeforeAfterVideos() {
     return rows;
   } catch (error) {
     console.error("Error fetching videos:", error);
-    return [];
+    throw error;
   }
 }
 
@@ -224,7 +224,7 @@ export async function deleteBeforeAfterVideo(id: number) {
     revalidatePath("/");
     revalidatePath("/gallery");
     return { success: true };
-  } catch (err) {
+  } catch (error) {
     console.error("Error deleting video:", err);
     return { error: "Failed to delete video" };
   }
@@ -234,9 +234,9 @@ export async function getTestimonials() {
   try {
     const { rows } = await sql`SELECT * FROM testimonials ORDER BY created_at DESC`;
     return rows;
-  } catch (err) {
+  } catch (error) {
     console.error("Error fetching testimonials:", err);
-    return [];
+    throw error;
   }
 }
 
@@ -249,7 +249,7 @@ export async function addTestimonial(name: string, role: string, text: string) {
     revalidatePath("/admin/dashboard/testimonials");
     revalidatePath("/");
     return { success: true };
-  } catch (err) {
+  } catch (error) {
     console.error("Error adding testimonial:", err);
     return { error: "Failed to add testimonial" };
   }
@@ -261,7 +261,7 @@ export async function deleteTestimonial(id: number) {
     revalidatePath("/admin/dashboard/testimonials");
     revalidatePath("/");
     return { success: true };
-  } catch (err) {
+  } catch (error) {
     console.error("Error deleting testimonial:", err);
     return { error: "Failed to delete testimonial" };
   }
@@ -271,9 +271,9 @@ export async function getGalleryPhotos() {
   try {
     const { rows } = await sql`SELECT * FROM gallery_photos ORDER BY display_order ASC`;
     return rows;
-  } catch (err) {
+  } catch (error) {
     console.error("Error fetching photos:", err);
-    return [];
+    throw error;
   }
 }
 
@@ -286,7 +286,7 @@ export async function addGalleryPhoto(title: string, image_url: string, display_
     revalidatePath("/admin/dashboard/photos");
     revalidatePath("/gallery");
     return { success: true };
-  } catch (err) {
+  } catch (error) {
     console.error("Error adding photo:", err);
     return { error: "Failed to add photo" };
   }
@@ -298,7 +298,7 @@ export async function deleteGalleryPhoto(id: number) {
     revalidatePath("/admin/dashboard/photos");
     revalidatePath("/gallery");
     return { success: true };
-  } catch (err) {
+  } catch (error) {
     console.error("Error deleting photo:", err);
     return { error: "Failed to delete photo" };
   }
@@ -309,9 +309,9 @@ export async function getProcessSteps() {
   try {
     const { rows } = await sql`SELECT * FROM process_steps ORDER BY display_order ASC, id ASC`;
     return rows;
-  } catch (err) {
+  } catch (error) {
     console.error("Error fetching process steps:", err);
-    return [];
+    throw error;
   }
 }
 
@@ -324,7 +324,7 @@ export async function addProcessStep(title: string, description: string, image_u
     revalidatePath("/admin/dashboard/process");
     revalidatePath("/");
     return { success: true };
-  } catch (err) {
+  } catch (error) {
     console.error("Error adding process step:", err);
     return { error: "Failed to add process step" };
   }
@@ -336,7 +336,7 @@ export async function deleteProcessStep(id: number) {
     revalidatePath("/admin/dashboard/process");
     revalidatePath("/");
     return { success: true };
-  } catch (err) {
+  } catch (error) {
     console.error("Error deleting process step:", err);
     return { error: "Failed to delete process step" };
   }
@@ -347,9 +347,9 @@ export async function getStaff() {
   try {
     const { rows } = await sql`SELECT id, name, email, created_at FROM staff_users ORDER BY created_at DESC`;
     return rows;
-  } catch (err) {
+  } catch (error) {
     console.error("Error fetching staff:", err);
-    return [];
+    throw error;
   }
 }
 
@@ -366,7 +366,7 @@ export async function addStaff(name: string, email: string, password: string) {
     `;
     revalidatePath("/admin/dashboard/staff");
     return { success: true };
-  } catch (err) {
+  } catch (error) {
     console.error("Error adding staff:", err);
     return { error: "Failed to add staff member" };
   }
@@ -377,7 +377,7 @@ export async function deleteStaff(id: number) {
     await sql`DELETE FROM staff_users WHERE id = ${id}`;
     revalidatePath("/admin/dashboard/staff");
     return { success: true };
-  } catch (err) {
+  } catch (error) {
     console.error("Error deleting staff:", err);
     return { error: "Failed to delete staff member" };
   }
@@ -391,7 +391,7 @@ export async function getLogo() {
       return rows[0].logo_url;
     }
     return null;
-  } catch (err) {
+  } catch (error) {
     console.error("Error fetching logo:", err);
     return null;
   }
@@ -406,7 +406,7 @@ export async function updateLogo(url: string | null) {
     revalidatePath("/");
     revalidatePath("/admin/dashboard/settings");
     return { success: true };
-  } catch (err) {
+  } catch (error) {
     console.error("Error updating logo:", err);
     return { success: false };
   }
@@ -417,9 +417,9 @@ export async function getProjects() {
   try {
     const { rows } = await sql`SELECT * FROM projects ORDER BY created_at DESC`;
     return rows;
-  } catch (err) {
+  } catch (error) {
     console.error("Error fetching projects:", err);
-    return [];
+    throw error;
   }
 }
 
