@@ -9,50 +9,60 @@ import { getLogo } from "@/lib/actions";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
-export const metadata: Metadata = {
-  title: "Syon Enterprises | Professional Waterproofing Services",
-  description: "Stop water leakage before it causes serious damage. Professional waterproofing solutions for homes, apartments, offices & commercial buildings.",
-  keywords: [
-    "Best waterproofing services",
-    "Roof waterproofing contractors",
-    "Water leakage solution",
-    "Basement waterproofing experts",
-    "Terrace waterproofing company",
-    "Crack filling and repair services",
-    "Industrial waterproofing contractors",
-    "Swimming pool waterproofing",
-    "Damp proofing treatments",
-    "Chemical waterproofing solutions",
-    "Waterproofing experts near me",
-    "Professional waterproofing company",
-    "Syon Enterprises",
-    "Syon Enterprises Waterproofing",
-    "Syon Enterprises contact number"
-  ],
-  openGraph: {
+export async function generateMetadata(): Promise<Metadata> {
+  const logo = await getLogo();
+  
+  return {
     title: "Syon Enterprises | Professional Waterproofing Services",
-    description: "Professional waterproofing solutions for homes, apartments, offices & commercial buildings. Stop water leakage today.",
-    type: "website",
-    locale: "en_US",
-    siteName: "Syon Enterprises",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Syon Enterprises | Professional Waterproofing Services",
-    description: "Professional waterproofing solutions for homes, apartments, offices & commercial buildings.",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+    description: "Stop water leakage before it causes serious damage. Professional waterproofing solutions for homes, apartments, offices & commercial buildings.",
+    icons: {
+      icon: logo || "/favicon.ico",
+      apple: logo || "/favicon.ico",
+    },
+    keywords: [
+      "Best waterproofing services",
+      "Roof waterproofing contractors",
+      "Water leakage solution",
+      "Basement waterproofing experts",
+      "Terrace waterproofing company",
+      "Crack filling and repair services",
+      "Industrial waterproofing contractors",
+      "Swimming pool waterproofing",
+      "Damp proofing treatments",
+      "Chemical waterproofing solutions",
+      "Waterproofing experts near me",
+      "Professional waterproofing company",
+      "Syon Enterprises",
+      "Syon Enterprises Waterproofing",
+      "Syon Enterprises contact number"
+    ],
+    openGraph: {
+      title: "Syon Enterprises | Professional Waterproofing Services",
+      description: "Professional waterproofing solutions for homes, apartments, offices & commercial buildings. Stop water leakage today.",
+      type: "website",
+      locale: "en_US",
+      siteName: "Syon Enterprises",
+      images: logo ? [logo] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Syon Enterprises | Professional Waterproofing Services",
+      description: "Professional waterproofing solutions for homes, apartments, offices & commercial buildings.",
+      images: logo ? [logo] : [],
+    },
+    robots: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
-  },
-};
+  };
+}
 
 export default async function RootLayout({
   children,
