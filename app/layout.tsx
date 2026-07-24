@@ -24,7 +24,10 @@ export const metadata: Metadata = {
     "Damp proofing treatments",
     "Chemical waterproofing solutions",
     "Waterproofing experts near me",
-    "Professional waterproofing company"
+    "Professional waterproofing company",
+    "Syon Enterprises",
+    "Syon Enterprises Waterproofing",
+    "Syon Enterprises contact number"
   ],
   openGraph: {
     title: "Syon Enterprises | Professional Waterproofing Services",
